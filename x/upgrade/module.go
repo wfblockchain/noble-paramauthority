@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"math/rand"
 
+	abci "github.com/cometbft/cometbft/abci/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
@@ -13,7 +14,6 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	sdkupgrademodule "github.com/cosmos/cosmos-sdk/x/upgrade"
 	sdkupgradecli "github.com/cosmos/cosmos-sdk/x/upgrade/client/cli"
-	sdkupgradekeeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
 	sdkupgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -21,7 +21,6 @@ import (
 	"github.com/strangelove-ventures/paramauthority/x/upgrade/client/cli"
 	"github.com/strangelove-ventures/paramauthority/x/upgrade/keeper"
 	"github.com/strangelove-ventures/paramauthority/x/upgrade/types"
-	abci "github.com/tendermint/tendermint/abci/types"
 )
 
 func init() {
@@ -96,19 +95,6 @@ func NewAppModule(keeper keeper.Keeper) AppModule {
 // RegisterInvariants does nothing, there are no invariants to enforce
 func (AppModule) RegisterInvariants(_ sdk.InvariantRegistry) {}
 
-// Deprecated: Route returns the message routing key for the upgrade module.
-func (AppModule) Route() sdk.Route {
-	return sdk.Route{}
-}
-
-// QuerierRoute returns the route we respond to for abci queries
-func (AppModule) QuerierRoute() string { return sdkupgradetypes.QuerierKey }
-
-// LegacyQuerierHandler registers a query handler to respond to the module-specific queries
-func (am AppModule) LegacyQuerierHandler(legacyQuerierCdc *codec.LegacyAmino) sdk.Querier {
-	return sdkupgradekeeper.NewQuerier(am.keeper.Keeper, legacyQuerierCdc)
-}
-
 // RegisterServices registers module services.
 func (am AppModule) RegisterServices(cfg module.Configurator) {
 	types.RegisterMsgServer(cfg.MsgServer(), keeper.NewMsgServerImpl(am.keeper))
@@ -154,7 +140,7 @@ func (AppModule) ConsensusVersion() uint64 { return consensusVersion }
 //
 // CONTRACT: this is registered in BeginBlocker *before* all other modules' BeginBlock functions
 func (am AppModule) BeginBlock(ctx sdk.Context, req abci.RequestBeginBlock) {
-	sdkupgrademodule.BeginBlocker(am.keeper.Keeper, ctx, req)
+	sdkupgrademodule.BeginBlocker(&am.keeper.Keeper, ctx, req)
 }
 
 func (am AppModule) GenerateGenesisState(simState *module.SimulationState) {
@@ -171,7 +157,7 @@ func (am AppModule) ProposalContents(_ module.SimulationState) []simtypes.Weight
 	return nil
 }
 
-func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.ParamChange {
+func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.LegacyParamChange {
 	return nil
 }
 

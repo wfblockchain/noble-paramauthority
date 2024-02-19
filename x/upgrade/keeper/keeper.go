@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/tendermint/tendermint/libs/log"
+	"github.com/cometbft/cometbft/libs/log"
 
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 
@@ -30,14 +30,14 @@ type Keeper struct {
 // cdc - the app-wide binary codec
 // homePath - root directory of the application's config
 // vs - the interface implemented by baseapp which allows setting baseapp's protocol version field
-func NewKeeper(skipUpgradeHeights map[int64]bool, storeKey storetypes.StoreKey, cdc codec.BinaryCodec, homePath string, vs xp.ProtocolVersionSetter, paramSpace sdkparamstypes.Subspace) Keeper {
+func NewKeeper(skipUpgradeHeights map[int64]bool, storeKey storetypes.StoreKey, cdc codec.BinaryCodec, homePath string, vs xp.ProtocolVersionSetter, paramSpace sdkparamstypes.Subspace, authority string) Keeper {
 	// set KeyTable if it has not already been set
 	if !paramSpace.HasKeyTable() {
 		paramSpace = paramSpace.WithKeyTable(types.ParamKeyTable())
 	}
 
 	return Keeper{
-		Keeper:     sdkupgradekeeper.NewKeeper(skipUpgradeHeights, storeKey, cdc, homePath, vs),
+		Keeper:     *sdkupgradekeeper.NewKeeper(skipUpgradeHeights, storeKey, cdc, homePath, vs, authority),
 		paramSpace: paramSpace,
 	}
 }
@@ -141,8 +141,8 @@ func (k Keeper) IsSkipHeight(height int64) bool {
 }
 
 // DumpUpgradeInfoToDisk writes upgrade information to UpgradeInfoFileName.
-func (k Keeper) DumpUpgradeInfoToDisk(height int64, name string) error {
-	return k.Keeper.DumpUpgradeInfoToDisk(height, name)
+func (k Keeper) DumpUpgradeInfoToDisk(height int64, p sdkupgradetypes.Plan) error {
+	return k.Keeper.DumpUpgradeInfoToDisk(height, p)
 }
 
 // GetUpgradeInfoPath returns the upgrade info file path
@@ -154,7 +154,7 @@ func (k Keeper) GetUpgradeInfoPath() (string, error) {
 // written to disk by the old binary when panicking. An error is returned if
 // the upgrade path directory cannot be created or if the file exists and
 // cannot be read or if the upgrade info fails to unmarshal.
-func (k Keeper) ReadUpgradeInfoFromDisk() (storetypes.UpgradeInfo, error) {
+func (k Keeper) ReadUpgradeInfoFromDisk() (sdkupgradetypes.Plan, error) {
 	return k.Keeper.ReadUpgradeInfoFromDisk()
 }
 
