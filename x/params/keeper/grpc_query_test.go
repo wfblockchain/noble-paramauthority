@@ -64,7 +64,7 @@ func (suite *KeeperTestSuite) TestGRPCQueryParams() {
 		},
 	}
 
-	suite.SetupTest()
+	// suite.SetupTest()
 	ctx := sdk.WrapSDKContext(suite.ctx)
 
 	for _, tc := range testCases {
