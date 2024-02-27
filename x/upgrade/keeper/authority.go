@@ -2,7 +2,7 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/strangelove-ventures/paramauthority/x/upgrade/types"
+	"github.com/wfblockchain/noble-paramauthority/x/upgrade/types"
 )
 
 // SetParams sets the total set of upgrade parameters.

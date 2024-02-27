@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/strangelove-ventures/paramauthority/x/upgrade/types"
+	"github.com/wfblockchain/noble-paramauthority/x/upgrade/types"
 )
 
 type msgServer struct {

@@ -12,7 +12,7 @@ import (
 	xp "github.com/cosmos/cosmos-sdk/x/upgrade/exported"
 	sdkupgradekeeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
 	sdkupgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
-	"github.com/strangelove-ventures/paramauthority/x/upgrade/types"
+	"github.com/wfblockchain/noble-paramauthority/x/upgrade/types"
 )
 
 // Deprecated: UpgradeInfoFileName file to store upgrade information

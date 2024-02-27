@@ -6,8 +6,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
-	"github.com/strangelove-ventures/paramauthority/x/ibc/types"
-	upgradetypes "github.com/strangelove-ventures/paramauthority/x/upgrade/types"
+	"github.com/wfblockchain/noble-paramauthority/x/ibc/types"
+	upgradetypes "github.com/wfblockchain/noble-paramauthority/x/upgrade/types"
 )
 
 type msgServer struct {

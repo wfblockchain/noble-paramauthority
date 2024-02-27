@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package paramauthority.ibc.core.client.v1;
 
-option go_package = "github.com/strangelove-ventures/paramauthority/x/ibc/types";
+option go_package = "github.com/wfblockchain/noble-paramauthority/x/ibc/types";
 
 import "gogoproto/gogo.proto";
 import "google/protobuf/any.proto";

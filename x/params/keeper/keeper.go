@@ -2,7 +2,7 @@ package keeper
 
 import (
 	"github.com/cometbft/cometbft/libs/log"
-	"github.com/strangelove-ventures/paramauthority/x/params/types/proposal"
+	"github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"

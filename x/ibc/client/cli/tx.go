@@ -13,7 +13,7 @@ import (
 	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
 	"github.com/cosmos/ibc-go/v7/modules/core/exported"
 	"github.com/spf13/cobra"
-	"github.com/strangelove-ventures/paramauthority/x/ibc/types"
+	"github.com/wfblockchain/noble-paramauthority/x/ibc/types"
 )
 
 // GetTxCmd returns the transaction commands for this module

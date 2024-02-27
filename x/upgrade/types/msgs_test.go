@@ -7,7 +7,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkupgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
-	"github.com/strangelove-ventures/paramauthority/x/upgrade/types"
+	"github.com/wfblockchain/noble-paramauthority/x/upgrade/types"
 )
 
 var authority = sdk.AccAddress("authority")

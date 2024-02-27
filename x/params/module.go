@@ -19,9 +19,9 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
-	"github.com/strangelove-ventures/paramauthority/x/params/client/cli"
-	"github.com/strangelove-ventures/paramauthority/x/params/keeper"
-	"github.com/strangelove-ventures/paramauthority/x/params/types/proposal"
+	"github.com/wfblockchain/noble-paramauthority/x/params/client/cli"
+	"github.com/wfblockchain/noble-paramauthority/x/params/keeper"
+	"github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
 )
 
 var (

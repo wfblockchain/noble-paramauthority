@@ -12,9 +12,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/strangelove-ventures/paramauthority/x/ibc/client/cli"
-	"github.com/strangelove-ventures/paramauthority/x/ibc/types"
-	"github.com/strangelove-ventures/paramauthority/x/params/types/proposal"
+	"github.com/wfblockchain/noble-paramauthority/x/ibc/client/cli"
+	"github.com/wfblockchain/noble-paramauthority/x/ibc/types"
+	"github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
 )
 
 var (

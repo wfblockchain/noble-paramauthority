@@ -18,9 +18,9 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
-	"github.com/strangelove-ventures/paramauthority/x/upgrade/client/cli"
-	"github.com/strangelove-ventures/paramauthority/x/upgrade/keeper"
-	"github.com/strangelove-ventures/paramauthority/x/upgrade/types"
+	"github.com/wfblockchain/noble-paramauthority/x/upgrade/client/cli"
+	"github.com/wfblockchain/noble-paramauthority/x/upgrade/keeper"
+	"github.com/wfblockchain/noble-paramauthority/x/upgrade/types"
 )
 
 func init() {
