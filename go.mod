@@ -1,4 +1,4 @@
-module github.com/strangelove-ventures/paramauthority
+module github.com/wfblockchain/noble-paramauthority
 
 go 1.19
 
