@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package paramauthority.ibc.core.client.v1;
+package cosmos2.ibc.core.client.v1;
 
 option go_package = "github.com/wfblockchain/noble-paramauthority/x/ibc/types";
 
 import "gogoproto/gogo.proto";
 import "google/protobuf/any.proto";
-import "cosmos_proto/upgrade/v1beta1/upgrade.proto";
+import "cosmos/upgrade/v1beta1/upgrade.proto";
 
 // Msg defines the gRPC msg service.
 service Msg {

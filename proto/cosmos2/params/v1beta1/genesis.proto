@@ -1,9 +1,9 @@
 syntax = "proto3";
-package cosmos.upgrade.v1beta1;
+package cosmos2.params.v1beta1;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/wfblockchain/noble-paramauthority/x/upgrade/types";
+option go_package            = "github.com/wfblockchain/noble-paramauthority/x/params/types/proposal";
 
 // GenesisState defines the param module's genesis state.
 message GenesisState {

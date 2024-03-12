@@ -11,8 +11,8 @@ import (
 // RegisterLegacyAminoCodec registers the necessary concrete types
 // on the provided LegacyAmino codec. These types are used for Amino JSON serialization.
 func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgSoftwareUpgrade{}, "cosmos-sdk/MsgSoftwareUpgrade", nil)
-	cdc.RegisterConcrete(&MsgCancelUpgrade{}, "cosmos-sdk/MsgCancelUpgrade", nil)
+	cdc.RegisterConcrete(&MsgSoftwareUpgrade{}, "cosmos-sdk-noble/MsgSoftwareUpgrade", nil)
+	cdc.RegisterConcrete(&MsgCancelUpgrade{}, "cosmos-sdk-noble/MsgCancelUpgrade", nil)
 }
 
 func RegisterInterfaces(registry types.InterfaceRegistry) {
