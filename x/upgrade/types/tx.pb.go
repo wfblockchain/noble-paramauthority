@@ -6,7 +6,7 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	github_com_cosmos_cosmos_sdk_x_upgrade_types "github.com/cosmos/cosmos-sdk/x/upgrade/types"
+	github_com_cosmos_cosmos_sdk_x_upgrade_types "cosmossdk.io/x/upgrade/types"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	grpc1 "github.com/cosmos/gogoproto/grpc"
 	proto "github.com/cosmos/gogoproto/proto"
@@ -36,7 +36,7 @@ type MsgSoftwareUpgrade struct {
 	// authority is the address of the governance account.
 	Authority string `protobuf:"bytes,1,opt,name=authority,proto3" json:"authority,omitempty"`
 	// plan is the upgrade plan.
-	Plan github_com_cosmos_cosmos_sdk_x_upgrade_types.Plan `protobuf:"bytes,2,opt,name=plan,proto3,casttype=github.com/cosmos/cosmos-sdk/x/upgrade/types.Plan" json:"plan"`
+	Plan github_com_cosmos_cosmos_sdk_x_upgrade_types.Plan `protobuf:"bytes,2,opt,name=plan,proto3,casttype=cosmossdk.io/x/upgrade/types.Plan" json:"plan"`
 }
 
 func (m *MsgSoftwareUpgrade) Reset()         { *m = MsgSoftwareUpgrade{} }

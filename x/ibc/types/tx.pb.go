@@ -7,7 +7,7 @@ import (
 	context "context"
 	fmt "fmt"
 	types1 "github.com/cosmos/cosmos-sdk/codec/types"
-	types "github.com/cosmos/cosmos-sdk/x/upgrade/types"
+	types "cosmossdk.io/x/upgrade/types"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	grpc1 "github.com/cosmos/gogoproto/grpc"
 	proto "github.com/cosmos/gogoproto/proto"

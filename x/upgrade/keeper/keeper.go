@@ -3,15 +3,15 @@ package keeper
 import (
 	"github.com/cometbft/cometbft/libs/log"
 
-	storetypes "github.com/cosmos/cosmos-sdk/store/types"
+	storetypes "cosmossdk.io/store/types"
 
+	xp "cosmossdk.io/x/upgrade/exported"
+	sdkupgradekeeper "cosmossdk.io/x/upgrade/keeper"
+	sdkupgradetypes "cosmossdk.io/x/upgrade/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	sdkparamstypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	xp "github.com/cosmos/cosmos-sdk/x/upgrade/exported"
-	sdkupgradekeeper "github.com/cosmos/cosmos-sdk/x/upgrade/keeper"
-	sdkupgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 	"github.com/wfblockchain/noble-paramauthority/x/upgrade/types"
 )
 
