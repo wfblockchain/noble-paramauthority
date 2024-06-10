@@ -12,8 +12,8 @@ import (
 func testComponents() (*codec.LegacyAmino, sdk.Context, storetypes.StoreKey, storetypes.StoreKey, paramskeeper.Keeper) {
 	marshaler := moduletestutil.MakeTestEncodingConfig().Codec
 	legacyAmino := createTestCodec()
-	mkey := sdk.NewKVStoreKey("test")
-	tkey := sdk.NewTransientStoreKey("transient_test")
+	mkey := storetypes.NewKVStoreKey("test")
+	tkey := storetypes.NewTransientStoreKey("transient_test")
 	ctx := testutil.DefaultContext(mkey, tkey)
 	keeper := paramskeeper.NewKeeper(marshaler, legacyAmino, mkey, tkey)
 

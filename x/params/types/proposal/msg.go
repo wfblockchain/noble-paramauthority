@@ -1,8 +1,8 @@
 package proposal
 
 import (
+	errors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 var (
@@ -23,7 +23,7 @@ func (m MsgUpdateParams) GetSignBytes() []byte {
 // ValidateBasic does a sanity check on the provided data.
 func (m *MsgUpdateParams) ValidateBasic() error {
 	if _, err := sdk.AccAddressFromBech32(m.Authority); err != nil {
-		return sdkerrors.Wrap(err, "authority")
+		return errors.Wrap(err, "authority")
 	}
 
 	return nil

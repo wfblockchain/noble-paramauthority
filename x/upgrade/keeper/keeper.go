@@ -1,9 +1,9 @@
 package keeper
 
 import (
-	"github.com/cometbft/cometbft/libs/log"
+	"cosmossdk.io/log"
 
-	storetypes "cosmossdk.io/store/types"
+	corestore "cosmossdk.io/core/store"
 
 	xp "cosmossdk.io/x/upgrade/exported"
 	sdkupgradekeeper "cosmossdk.io/x/upgrade/keeper"
@@ -30,14 +30,14 @@ type Keeper struct {
 // cdc - the app-wide binary codec
 // homePath - root directory of the application's config
 // vs - the interface implemented by baseapp which allows setting baseapp's protocol version field
-func NewKeeper(skipUpgradeHeights map[int64]bool, storeKey storetypes.StoreKey, cdc codec.BinaryCodec, homePath string, vs xp.ProtocolVersionSetter, paramSpace sdkparamstypes.Subspace, authority string) Keeper {
+func NewKeeper(skipUpgradeHeights map[int64]bool, storeService corestore.KVStoreService, cdc codec.BinaryCodec, homePath string, vs xp.ProtocolVersionSetter, paramSpace sdkparamstypes.Subspace, authority string) Keeper {
 	// set KeyTable if it has not already been set
 	if !paramSpace.HasKeyTable() {
 		paramSpace = paramSpace.WithKeyTable(types.ParamKeyTable())
 	}
 
 	return Keeper{
-		Keeper:     *sdkupgradekeeper.NewKeeper(skipUpgradeHeights, storeKey, cdc, homePath, vs, authority),
+		Keeper:     *sdkupgradekeeper.NewKeeper(skipUpgradeHeights, storeService, cdc, homePath, vs, authority),
 		paramSpace: paramSpace,
 	}
 }
@@ -56,12 +56,13 @@ func (k Keeper) SetModuleVersionMap(ctx sdk.Context, vm module.VersionMap) {
 
 // GetModuleVersionMap returns a map of key module name and value module consensus version
 // as defined in ADR-041.
-func (k Keeper) GetModuleVersionMap(ctx sdk.Context) module.VersionMap {
+func (k Keeper) GetModuleVersionMap(ctx sdk.Context) (module.VersionMap, error) {
+
 	return k.Keeper.GetModuleVersionMap(ctx)
 }
 
 // GetModuleVersions gets a slice of module consensus versions
-func (k Keeper) GetModuleVersions(ctx sdk.Context) []*sdkupgradetypes.ModuleVersion {
+func (k Keeper) GetModuleVersions(ctx sdk.Context) ([]*sdkupgradetypes.ModuleVersion, error) {
 	return k.Keeper.GetModuleVersions(ctx)
 }
 
@@ -79,7 +80,7 @@ func (k Keeper) SetUpgradedClient(ctx sdk.Context, planHeight int64, bz []byte) 
 }
 
 // GetUpgradedClient gets the expected upgraded client for the next version of this chain
-func (k Keeper) GetUpgradedClient(ctx sdk.Context, height int64) ([]byte, bool) {
+func (k Keeper) GetUpgradedClient(ctx sdk.Context, height int64) ([]byte, error) {
 	return k.Keeper.GetUpgradedClient(ctx, height)
 }
 
@@ -90,17 +91,17 @@ func (k Keeper) SetUpgradedConsensusState(ctx sdk.Context, planHeight int64, bz 
 }
 
 // GetUpgradedConsensusState set the expected upgraded consensus state for the next version of this chain
-func (k Keeper) GetUpgradedConsensusState(ctx sdk.Context, lastHeight int64) ([]byte, bool) {
+func (k Keeper) GetUpgradedConsensusState(ctx sdk.Context, lastHeight int64) ([]byte, error) {
 	return k.Keeper.GetUpgradedConsensusState(ctx, lastHeight)
 }
 
 // GetLastCompletedUpgrade returns the last applied upgrade name and height.
-func (k Keeper) GetLastCompletedUpgrade(ctx sdk.Context) (string, int64) {
+func (k Keeper) GetLastCompletedUpgrade(ctx sdk.Context) (string, int64, error) {
 	return k.Keeper.GetLastCompletedUpgrade(ctx)
 }
 
 // GetDoneHeight returns the height at which the given upgrade was executed
-func (k Keeper) GetDoneHeight(ctx sdk.Context, name string) int64 {
+func (k Keeper) GetDoneHeight(ctx sdk.Context, name string) (int64, error) {
 	return k.Keeper.GetDoneHeight(ctx, name)
 }
 
@@ -121,7 +122,7 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 
 // GetUpgradePlan returns the currently scheduled Plan if any, setting havePlan to true if there is a scheduled
 // upgrade or false if there is none
-func (k Keeper) GetUpgradePlan(ctx sdk.Context) (plan sdkupgradetypes.Plan, havePlan bool) {
+func (k Keeper) GetUpgradePlan(ctx sdk.Context) (plan sdkupgradetypes.Plan, err error) {
 	return k.Keeper.GetUpgradePlan(ctx)
 }
 

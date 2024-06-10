@@ -1,8 +1,8 @@
 package types
 
 import (
+	errors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	clienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
 )
 
@@ -24,7 +24,7 @@ func (m *MsgClientUpdate) GetSignBytes() []byte {
 // ValidateBasic runs basic stateless validity checks
 func (m *MsgClientUpdate) ValidateBasic() error {
 	if m.SubjectClientId == m.SubstituteClientId {
-		return sdkerrors.Wrap(clienttypes.ErrInvalidSubstitute, "subject and substitute client identifiers are equal")
+		return errors.Wrap(clienttypes.ErrInvalidSubstitute, "subject and substitute client identifiers are equal")
 	}
 	if _, _, err := clienttypes.ParseClientIdentifier(m.SubjectClientId); err != nil {
 		return err
@@ -49,12 +49,12 @@ func (up *MsgUpgrade) ValidateBasic() error {
 	}
 
 	if up.UpgradedClientState == nil {
-		return sdkerrors.Wrap(clienttypes.ErrInvalidUpgradeProposal, "upgraded client state cannot be nil")
+		return errors.Wrap(clienttypes.ErrInvalidUpgradeProposal, "upgraded client state cannot be nil")
 	}
 
 	_, err := clienttypes.UnpackClientState(up.UpgradedClientState)
 	if err != nil {
-		return sdkerrors.Wrap(err, "failed to unpack upgraded client state")
+		return errors.Wrap(err, "failed to unpack upgraded client state")
 	}
 
 	return nil

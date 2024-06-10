@@ -1,8 +1,8 @@
 package types
 
 import (
+	errors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 var (
@@ -23,11 +23,11 @@ func (m MsgSoftwareUpgrade) GetSignBytes() []byte {
 // ValidateBasic does a sanity check on the provided data.
 func (m *MsgSoftwareUpgrade) ValidateBasic() error {
 	if _, err := sdk.AccAddressFromBech32(m.Authority); err != nil {
-		return sdkerrors.Wrap(err, "authority")
+		return errors.Wrap(err, "authority")
 	}
 
 	if err := m.Plan.ValidateBasic(); err != nil {
-		return sdkerrors.Wrap(err, "plan")
+		return errors.Wrap(err, "plan")
 	}
 
 	return nil
@@ -53,7 +53,7 @@ func (m MsgCancelUpgrade) GetSignBytes() []byte {
 // ValidateBasic does a sanity check on the provided data.
 func (m *MsgCancelUpgrade) ValidateBasic() error {
 	if _, err := sdk.AccAddressFromBech32(m.Authority); err != nil {
-		return sdkerrors.Wrap(err, "authority")
+		return errors.Wrap(err, "authority")
 	}
 
 	return nil

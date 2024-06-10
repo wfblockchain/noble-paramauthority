@@ -12,7 +12,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
-	sdkparamscli "github.com/cosmos/cosmos-sdk/x/params/client/cli"
+	typessim "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/params/simulation"
 	"github.com/cosmos/cosmos-sdk/x/params/types"
 	sdkproposal "github.com/cosmos/cosmos-sdk/x/params/types/proposal"
@@ -22,12 +22,6 @@ import (
 	"github.com/wfblockchain/noble-paramauthority/x/params/client/cli"
 	"github.com/wfblockchain/noble-paramauthority/x/params/keeper"
 	"github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
-)
-
-var (
-	_ module.AppModule           = AppModule{}
-	_ module.AppModuleBasic      = AppModuleBasic{}
-	_ module.AppModuleSimulation = AppModule{}
 )
 
 // AppModuleBasic defines the basic application module used by the params module.
@@ -69,9 +63,9 @@ func (AppModuleBasic) GetTxCmd() *cobra.Command {
 }
 
 // GetQueryCmd returns no root query command for the params module.
-func (AppModuleBasic) GetQueryCmd() *cobra.Command {
-	return sdkparamscli.NewQueryCmd()
-}
+// func (AppModuleBasic) GetQueryCmd() *cobra.Command {
+// 	return sdkparamscli.NewQueryCmd()
+// }
 
 func (am AppModuleBasic) RegisterInterfaces(registry codectypes.InterfaceRegistry) {
 	sdkproposal.RegisterInterfaces(registry)
@@ -145,7 +139,7 @@ func (AppModule) RandomizedParams(r *rand.Rand) []simtypes.LegacyParamChange {
 }
 
 // RegisterStoreDecoder doesn't register any type.
-func (AppModule) RegisterStoreDecoder(sdr sdk.StoreDecoderRegistry) {}
+func (AppModule) RegisterStoreDecoder(sdr typessim.StoreDecoderRegistry) {}
 
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(_ module.SimulationState) []simtypes.WeightedOperation {

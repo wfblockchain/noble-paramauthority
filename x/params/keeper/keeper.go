@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/cometbft/cometbft/libs/log"
+	"cosmossdk.io/log"
 	"github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
 
 	storetypes "cosmossdk.io/store/types"

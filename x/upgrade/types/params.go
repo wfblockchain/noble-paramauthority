@@ -3,8 +3,8 @@ package types
 import (
 	fmt "fmt"
 
+	errors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )
 
@@ -46,7 +46,7 @@ func validateAuthority(i interface{}) error {
 	}
 
 	if _, err := sdk.AccAddressFromBech32(a); err != nil {
-		return sdkerrors.Wrap(err, "authority")
+		return errors.Wrap(err, "authority")
 	}
 
 	return nil

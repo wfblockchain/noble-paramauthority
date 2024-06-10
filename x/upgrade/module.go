@@ -6,7 +6,6 @@ import (
 	"math/rand"
 
 	sdkupgrademodule "cosmossdk.io/x/upgrade"
-	sdkupgradecli "cosmossdk.io/x/upgrade/client/cli"
 	sdkupgradetypes "cosmossdk.io/x/upgrade/types"
 	abci "github.com/cometbft/cometbft/abci/types"
 	"github.com/cosmos/cosmos-sdk/client"
@@ -15,6 +14,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
+	typesim "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
@@ -29,12 +29,6 @@ func init() {
 
 const (
 	consensusVersion uint64 = 1
-)
-
-var (
-	_ module.AppModule           = AppModule{}
-	_ module.AppModuleBasic      = AppModuleBasic{}
-	_ module.AppModuleSimulation = AppModule{}
 )
 
 // AppModuleBasic implements the sdk.AppModuleBasic interface
@@ -64,9 +58,9 @@ func (AppModuleBasic) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *r
 }
 
 // GetQueryCmd returns the cli query commands for this module
-func (AppModuleBasic) GetQueryCmd() *cobra.Command {
-	return sdkupgradecli.GetQueryCmd()
-}
+// func (AppModuleBasic) GetQueryCmd() *cobra.Command {
+// 	return sdkupgradecli.GetQueryCmd()
+// }
 
 // GetTxCmd returns the transaction commands for this module
 func (AppModuleBasic) GetTxCmd() *cobra.Command {
@@ -139,8 +133,8 @@ func (AppModule) ConsensusVersion() uint64 { return consensusVersion }
 // BeginBlock calls the upgrade module hooks
 //
 // CONTRACT: this is registered in BeginBlocker *before* all other modules' BeginBlock functions
-func (am AppModule) BeginBlock(ctx sdk.Context, req abci.RequestBeginBlock) {
-	sdkupgrademodule.BeginBlocker(&am.keeper.Keeper, ctx, req)
+func (am AppModule) PreBlock(ctx sdk.Context) {
+	sdkupgrademodule.PreBlocker(ctx, &am.keeper.Keeper)
 }
 
 func (am AppModule) GenerateGenesisState(simState *module.SimulationState) {
@@ -161,7 +155,7 @@ func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.LegacyParamChange 
 	return nil
 }
 
-func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
+func (am AppModule) RegisterStoreDecoder(_ typesim.StoreDecoderRegistry) {}
 
 func (am AppModule) WeightedOperations(_ module.SimulationState) []simtypes.WeightedOperation {
 	return nil
