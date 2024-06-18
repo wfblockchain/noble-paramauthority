@@ -33,7 +33,11 @@ const (
 // AppModuleBasic implements the sdk.AppModuleBasic interface
 type AppModuleBasic struct{}
 
-func (am AppModule) IsAppModule() {}
+// IsAppModule implements the appmodule.AppModule interface.
+func (AppModule) IsAppModule() {}
+
+// IsOnePerModuleType implements the depinject.OnePerModuleType interface.
+func (AppModule) IsOnePerModuleType() {}
 
 // Name returns the ModuleName
 func (AppModuleBasic) Name() string {
