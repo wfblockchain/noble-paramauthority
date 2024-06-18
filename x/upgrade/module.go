@@ -14,7 +14,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
-	typesim "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
@@ -33,6 +32,8 @@ const (
 
 // AppModuleBasic implements the sdk.AppModuleBasic interface
 type AppModuleBasic struct{}
+
+func (am AppModule) IsAppModule() {}
 
 // Name returns the ModuleName
 func (AppModuleBasic) Name() string {
@@ -155,7 +156,7 @@ func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.LegacyParamChange 
 	return nil
 }
 
-func (am AppModule) RegisterStoreDecoder(_ typesim.StoreDecoderRegistry) {}
+func (am AppModule) RegisterStoreDecoder(_ simtypes.StoreDecoderRegistry) {}
 
 func (am AppModule) WeightedOperations(_ module.SimulationState) []simtypes.WeightedOperation {
 	return nil
