@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cosmos2.ibc.core.client.v1;
+package cosmos.ibc.core.client.v1;
 
 option go_package = "github.com/wfblockchain/noble-paramauthority/x/ibc/types";
 

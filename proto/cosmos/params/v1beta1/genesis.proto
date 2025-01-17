@@ -1,5 +1,5 @@
 syntax = "proto3";
-package cosmos2.params.v1beta1;
+package cosmos.params.v1beta1;
 
 import "gogoproto/gogo.proto";
 
