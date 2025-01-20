@@ -108,8 +108,9 @@ func (k Keeper) GetDoneHeight(ctx sdk.Context, name string) (int64, error) {
 }
 
 // ClearIBCState clears any planned IBC state
-func (k Keeper) ClearIBCState(ctx context.Context, lastHeight int64) {
+func (k Keeper) ClearIBCState(ctx context.Context, lastHeight int64) error {
 	k.Keeper.ClearIBCState(ctx, lastHeight)
+	return nil
 }
 
 // ClearUpgradePlan clears any schedule upgrade and associated IBC states.
