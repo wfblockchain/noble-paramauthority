@@ -1,6 +1,8 @@
 package keeper
 
 import (
+	"context"
+
 	"cosmossdk.io/log"
 
 	corestore "cosmossdk.io/core/store"
@@ -106,7 +108,7 @@ func (k Keeper) GetDoneHeight(ctx sdk.Context, name string) (int64, error) {
 }
 
 // ClearIBCState clears any planned IBC state
-func (k Keeper) ClearIBCState(ctx sdk.Context, lastHeight int64) {
+func (k Keeper) ClearIBCState(ctx context.Context, lastHeight int64) {
 	k.Keeper.ClearIBCState(ctx, lastHeight)
 }
 

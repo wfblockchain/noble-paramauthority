@@ -79,6 +79,12 @@ type AppModule struct {
 	keeper keeper.Keeper
 }
 
+// IsAppModule implements the appmodule.AppModule interface.
+func (AppModule) IsAppModule() {}
+
+// IsOnePerModuleType implements the depinject.OnePerModuleType interface.
+func (AppModule) IsOnePerModuleType() {}
+
 // NewAppModule creates a new AppModule object
 func NewAppModule(k keeper.Keeper) AppModule {
 	return AppModule{
