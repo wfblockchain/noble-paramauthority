@@ -125,7 +125,7 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 
 // GetUpgradePlan returns the currently scheduled Plan if any, setting havePlan to true if there is a scheduled
 // upgrade or false if there is none
-func (k Keeper) GetUpgradePlan(ctx sdk.Context) (plan sdkupgradetypes.Plan, err error) {
+func (k Keeper) GetUpgradePlan(ctx context.Context) (plan sdkupgradetypes.Plan, err error) {
 	return k.Keeper.GetUpgradePlan(ctx)
 }
 
