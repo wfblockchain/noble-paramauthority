@@ -82,7 +82,7 @@ func (k Keeper) SetUpgradedClient(ctx sdk.Context, planHeight int64, bz []byte) 
 }
 
 // GetUpgradedClient gets the expected upgraded client for the next version of this chain
-func (k Keeper) GetUpgradedClient(ctx sdk.Context, height int64) ([]byte, error) {
+func (k Keeper) GetUpgradedClient(ctx context.Context, height int64) ([]byte, error) {
 	return k.Keeper.GetUpgradedClient(ctx, height)
 }
 
