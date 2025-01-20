@@ -72,12 +72,12 @@ func (k Keeper) GetModuleVersions(ctx sdk.Context) ([]*sdkupgradetypes.ModuleVer
 // If there is another Plan already scheduled, it will cancel and overwrite it.
 // ScheduleUpgrade will also write the upgraded IBC ClientState to the upgraded client
 // path if it is specified in the plan.
-func (k Keeper) ScheduleUpgrade(ctx sdk.Context, plan sdkupgradetypes.Plan) error {
+func (k Keeper) ScheduleUpgrade(ctx context.Context, plan sdkupgradetypes.Plan) error {
 	return k.Keeper.ScheduleUpgrade(ctx, plan)
 }
 
 // SetUpgradedClient sets the expected upgraded client for the next version of this chain at the last height the current chain will commit.
-func (k Keeper) SetUpgradedClient(ctx sdk.Context, planHeight int64, bz []byte) error {
+func (k Keeper) SetUpgradedClient(ctx context.Context, planHeight int64, bz []byte) error {
 	return k.Keeper.SetUpgradedClient(ctx, planHeight, bz)
 }
 
@@ -88,7 +88,7 @@ func (k Keeper) GetUpgradedClient(ctx context.Context, height int64) ([]byte, er
 
 // SetUpgradedConsensusState set the expected upgraded consensus state for the next version of this chain
 // using the last height committed on this chain.
-func (k Keeper) SetUpgradedConsensusState(ctx sdk.Context, planHeight int64, bz []byte) error {
+func (k Keeper) SetUpgradedConsensusState(ctx context.Context, planHeight int64, bz []byte) error {
 	return k.Keeper.SetUpgradedConsensusState(ctx, planHeight, bz)
 }
 
@@ -114,7 +114,7 @@ func (k Keeper) ClearIBCState(ctx context.Context, lastHeight int64) error {
 }
 
 // ClearUpgradePlan clears any schedule upgrade and associated IBC states.
-func (k Keeper) ClearUpgradePlan(ctx sdk.Context) {
+func (k Keeper) ClearUpgradePlan(ctx context.Context) {
 	k.Keeper.ClearUpgradePlan(ctx)
 }
 
