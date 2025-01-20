@@ -93,17 +93,17 @@ func (k Keeper) SetUpgradedConsensusState(ctx sdk.Context, planHeight int64, bz 
 }
 
 // GetUpgradedConsensusState set the expected upgraded consensus state for the next version of this chain
-func (k Keeper) GetUpgradedConsensusState(ctx sdk.Context, lastHeight int64) ([]byte, error) {
+func (k Keeper) GetUpgradedConsensusState(ctx context.Context, lastHeight int64) ([]byte, error) {
 	return k.Keeper.GetUpgradedConsensusState(ctx, lastHeight)
 }
 
 // GetLastCompletedUpgrade returns the last applied upgrade name and height.
-func (k Keeper) GetLastCompletedUpgrade(ctx sdk.Context) (string, int64, error) {
+func (k Keeper) GetLastCompletedUpgrade(ctx context.Context) (string, int64, error) {
 	return k.Keeper.GetLastCompletedUpgrade(ctx)
 }
 
 // GetDoneHeight returns the height at which the given upgrade was executed
-func (k Keeper) GetDoneHeight(ctx sdk.Context, name string) (int64, error) {
+func (k Keeper) GetDoneHeight(ctx context.Context, name string) (int64, error) {
 	return k.Keeper.GetDoneHeight(ctx, name)
 }
 
