@@ -72,6 +72,12 @@ func (am AppModuleBasic) RegisterInterfaces(registry codectypes.InterfaceRegistr
 	proposal.RegisterInterfaces(registry)
 }
 
+// IsAppModule implements the appmodule.AppModule interface.
+func (AppModule) IsAppModule() {}
+
+// IsOnePerModuleType implements the depinject.OnePerModuleType interface.
+func (AppModule) IsOnePerModuleType() {}
+
 // AppModule implements an application module for the distribution module.
 type AppModule struct {
 	AppModuleBasic
