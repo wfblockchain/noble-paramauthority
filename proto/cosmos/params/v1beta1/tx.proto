@@ -9,6 +9,7 @@ option go_package = "github.com/wfblockchain/noble-paramauthority/x/params/types
 
 // Msg defines the gRPC msg service.
 service Msg {
+  option (cosmos.msg.v1.service) = true;
   rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
 }
 
