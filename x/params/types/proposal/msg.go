@@ -16,9 +16,9 @@ func (m MsgUpdateParams) Route() string { return sdk.MsgTypeURL(&m) }
 func (m MsgUpdateParams) Type() string { return sdk.MsgTypeURL(&m) }
 
 // GetSignBytes implements the LegacyMsg interface.
-func (m MsgUpdateParams) GetSignBytes() []byte {
-	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(&m))
-}
+// func (m MsgUpdateParams) GetSignBytes() []byte {
+// 	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(&m))
+// }
 
 // ValidateBasic does a sanity check on the provided data.
 func (m *MsgUpdateParams) ValidateBasic() error {

@@ -6,7 +6,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
-	sdkparamstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	sdkproposal "github.com/cosmos/cosmos-sdk/x/params/types/proposal"
 	"github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
 )
@@ -14,8 +13,11 @@ import (
 // GetTxCmd returns the transaction commands for this module
 func GetTxCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   sdkparamstypes.ModuleName,
-		Short: "Params transaction subcommands",
+		Use:                        proposal.ModuleName,
+		Short:                      "Params transaction subcommands",
+		DisableFlagParsing:         true,
+		SuggestionsMinimumDistance: 2,
+		RunE:                       client.ValidateCmd,
 	}
 
 	cmd.AddCommand(NewCmdUpdateParams())

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package noble.paramauthority.v1beta1;
+package paramauthority;
 
 
 import "cosmos_proto/params/v1beta1/params.proto";
