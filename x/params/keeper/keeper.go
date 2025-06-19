@@ -18,7 +18,7 @@ type Keeper struct {
 }
 
 // NewKeeper constructs a params keeper
-func NewKeeper(cdc codec.BinaryCodec, legacyAmino *codec.LegacyAmino, key, tkey storetypes.StoreKey) Keeper {
+func NewKeeper(cdc codec.BinaryCodec, legacyAmino *codec.LegacyAmino, key, tkey storetypes.StoreKey) *Keeper {
 	paramsKeeper := keeper.NewKeeper(
 		cdc,
 		legacyAmino,
@@ -35,7 +35,7 @@ func NewKeeper(cdc codec.BinaryCodec, legacyAmino *codec.LegacyAmino, key, tkey 
 		k.paramSpace = k.paramSpace.WithKeyTable(proposal.ParamKeyTable())
 	}
 
-	return k
+	return &k
 }
 
 // Logger returns a module-specific logger.
